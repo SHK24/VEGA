@@ -1,0 +1,29 @@
+<head>
+	<script src="plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+	<div id="tester" style="width:600px;height:250px;"></div>
+	
+</body>
+
+<script>
+	
+	values = []
+	y = []
+	counter = 0
+	
+	
+	function addData(elementname, data)
+	{
+		y.push(counter)
+		values.push((Math.random() * 100) % 100)
+		plot = document.getElementById('tester');
+		Plotly.plot( plot, [values])
+		counter++
+	}
+	
+	setInterval(addData('tester', 100), 1000)
+	
+</script>

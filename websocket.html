@@ -1,0 +1,101 @@
+<head>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="plotly-latest.min.js"></script>
+	<script src="script/vegaExchange.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	-->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<html>
+
+	<form class="w-25 p-3">
+	  <div class="form-group">
+		<label for="exampleInputEmail1">Логин</label>
+		<input class="form-control" id="login" placeholder="Логин">
+	  </div>
+	  <div class="form-group">
+		<label for="exampleInputPassword1">Пароль</label>
+		<input type="password" class="form-control" id="password" placeholder="Пароль">
+	  </div>
+	  <div class="form-group">
+		<label for="exampleInputPassword1">Адрес</label>
+		<input type="address" class="form-control" id="password" placeholder="Адрес">
+	  </div>
+	  <button type="button" class="btn btn-primary" onclick=auth()>Авторизация</button>
+	  <button type="button" class="btn btn-danger" id="connectStatus">Соединение не установлено</button>
+	</form>
+	
+	<button type="button" class="btn btn-primary" onclick=getDevicesList()>Запрос устройств</button>
+	<button type="button" class="btn btn-primary" onclick=getData()>Запрос данных</button>
+	
+	<p>Список устройств</p>
+	<ul class="list-group" id="deviceList" class="w-50 p-3">
+
+	</ul>
+	
+	<div id="tester" style="width:600px;height:250px;"></div>
+	
+</html>
+
+<script>
+	devicesID_list = []
+	values = []
+	y = []
+	counter = 0
+			
+	function rand() {
+	  return Math.random();
+	}
+
+	//Визуализация--------------------------------------------
+	
+	function dataReceived()
+	{
+		addData("1234", 0)
+	}
+	
+	function addData(elementname, data)
+	{
+		devicesID_list.forEach(function(element) {
+			values.push((Math.random() * 100) % 100)
+			plot = document.getElementById(element + "_value");
+			
+			Plotly.extendTraces(plot, {y: [[rand()]]}, [0])
+			
+			values.push((Math.random() * 100) % 100)
+			plot = document.getElementById(element + "_temp");
+			
+			Plotly.extendTraces(plot, {y: [[rand()]]}, [0])
+		});
+	}
+	
+	function addData(elementname, data)
+	{
+		devicesID_list.forEach(function(element) {
+			values.push((Math.random() * 100) % 100)
+			plot = document.getElementById(element + "_value");
+			
+			Plotly.extendTraces(plot, {y: [[rand()]]}, [0])
+			
+		});
+	}
+
+	function setConnectStatus(status)
+	{
+		if(status)
+		{
+			connectStatus = document.getElementById("connectStatus")
+			connectStatus.className="btn btn-success"
+			connectStatus.innerText = "Соединение установлено"
+		}
+		else
+		{
+			connectStatus = document.getElementById("connectStatus")
+			connectStatus.className="btn btn-danger"
+			connectStatus.innerText = "Соединение не установлено"
+		}
+	}
+	
+</script>
